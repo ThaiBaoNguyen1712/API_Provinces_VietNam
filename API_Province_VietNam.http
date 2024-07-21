@@ -1,0 +1,6 @@
+@API_Province_VietNam_HostAddress = http://localhost:5130
+
+GET {{API_Province_VietNam_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
