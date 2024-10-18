@@ -10,10 +10,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add DbContext
+// Cấu hình DbContext với thời gian chờ là 300 giây (5 phút)
 builder.Services.AddDbContext<ProvincesVietNamContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"), // Chuỗi kết nối trong appsettings.json
+        sqlServerOptions =>
+        {
+            sqlServerOptions.CommandTimeout(600); // Thời gian chờ là 600 giây
+        }
+    )
+);
 // Cấu hình CORS để cho phép tất cả các nguồn gốc
 builder.Services.AddCors(options =>
 {
